@@ -8,7 +8,7 @@ using TerrariaApi.Server;
 
 namespace Freeze
 {
-	[ApiVersion(2, 0)]
+	[ApiVersion(2, 1)]
 	public class Freeze : TerrariaPlugin
 	{
 		public static List<FrozenPlayer> FrozenPlayers = new List<FrozenPlayer>();
@@ -45,7 +45,10 @@ namespace Freeze
 		{
 			if (disposing)
 			{
-			}
+                ServerApi.Hooks.ServerLeave.Deregister(this, OnLeave);
+                ServerApi.Hooks.ServerJoin.Deregister(this, OnJoin);
+                Commands.ChatCommands.Remove(new Command("freeze.use", freeze, "freeze"));
+            }
 			base.Dispose(disposing);
 		}
 
