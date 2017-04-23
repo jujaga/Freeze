@@ -73,15 +73,19 @@ namespace Freeze
 
 		public void OnLeave(LeaveEventArgs e)
 		{
-			TSPlayer ts = TShock.Players[e.Who];
-			int i = FrozenPlayers.FindIndex(f => f.Index == e.Who);
-			if (i >= 0)
-			{
-				if (!IpNames.ContainsKey(ts.IP))
-					IpNames.Add(ts.IP, ts.Name);
+            try
+            {
+                TSPlayer ts = TShock.Players[e.Who];
+                int i = FrozenPlayers.FindIndex(f => f.Index == e.Who);
+                if (i >= 0)
+                {
+                    if (!IpNames.ContainsKey(ts.IP))
+                        IpNames.Add(ts.IP, ts.Name);
 
-				FrozenPlayers.RemoveAt(i);
-			}
+                    FrozenPlayers.RemoveAt(i);
+                }
+            }
+            catch { }
 		}
 
 		public void OnJoin(JoinEventArgs e)
