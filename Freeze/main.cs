@@ -73,7 +73,7 @@ namespace Freeze
 
 		public void OnLeave(LeaveEventArgs e)
 		{
-            try
+            if(e.Who < TShock.Players.GetLength(0))
             {
                 TSPlayer ts = TShock.Players[e.Who];
                 int i = FrozenPlayers.FindIndex(f => f.Index == e.Who);
@@ -85,7 +85,6 @@ namespace Freeze
                     FrozenPlayers.RemoveAt(i);
                 }
             }
-            catch { }
 		}
 
 		public void OnJoin(JoinEventArgs e)
